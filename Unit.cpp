@@ -1,10 +1,13 @@
+#ifndef UNIT_CPP
+#define UNIT_CPP
 #include "Unit.h"
 
+const std::vector< std::string > ClassUnit::ACCESS_MODIFIERS = { "public", "protected", "private" };
 
 
 std::string Unit::generateShift(unsigned int level) const
 {
-    static const auto DEFAULT_SHIFT = " ";
+    static const auto DEFAULT_SHIFT = "    ";
     std::string result;
     for( unsigned int i = 0; i < level; ++i ) {
         result += DEFAULT_SHIFT;
@@ -60,3 +63,5 @@ std::string MethodUnit::compile(unsigned int level) const {
     result += generateShift( level ) + "}\n";
     return result;
 }
+
+#endif

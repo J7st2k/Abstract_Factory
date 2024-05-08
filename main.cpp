@@ -2,7 +2,6 @@
 #include "Unit.h"
 #include <iostream>
 
-const std::vector< std::string > ClassUnit::ACCESS_MODIFIERS = { "public", "protected", "private" };
 
 std::string generateProgram() {
     ClassUnit myClass( "MyClass" );
