@@ -2,9 +2,6 @@
 #define UNIT_CPP
 #include "Unit.h"
 
-
-
-
 std::string Unit::generateShift(unsigned int level) const
 {
     static const auto DEFAULT_SHIFT = "    ";
