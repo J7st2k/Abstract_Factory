@@ -5,6 +5,9 @@
 
 std::string generateProgram(Factory& factory) {
     auto myClass = factory.CreateClass( "MyClass" );
+    if (myClass == nullptr) {
+        return "Out of memory for MyClass";
+    }
     myClass->add(
         factory.CreateMethod( "testFunc1", "void", 0 ),
         ClassUnit::PUBLIC
@@ -18,8 +21,10 @@ std::string generateProgram(Factory& factory) {
         ClassUnit::PUBLIC
         );
     auto method = factory.CreateMethod( "testFunc4", "void", MethodUnit::STATIC );
-    method->add( factory.CreatePrintOperator( R"(Hello, world!\n)" ) );
-    myClass->add( method, ClassUnit::PROTECTED );
+    if (method) {
+        method->add( factory.CreatePrintOperator( R"(Hello, world!\n)" ) );
+        myClass->add( method, ClassUnit::PROTECTED );
+    }
     return myClass->compile();
 }
 

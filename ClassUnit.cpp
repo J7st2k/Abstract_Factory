@@ -9,6 +9,10 @@ ClassUnit::ClassUnit(const std::string &name) : m_name( name ) {
 }
 
 void CPlusClass::add(const std::shared_ptr<Unit> &unit, Flags flags) {
+    if(unit == nullptr) {
+        std::cout << "Out of memory for " << m_name << std::endl;
+        return;
+    }
     int accessModifier = PRIVATE;
     if( flags < 3 ) {
         accessModifier = flags;
@@ -35,6 +39,10 @@ std::string CPlusClass::compile(unsigned int level, std::string access) const
 }
 
 void CSharpClass::add(const std::shared_ptr<Unit> &unit, Flags flags) {
+    if(unit == nullptr) {
+        std::cout << "Out of memory for " << m_name << std::endl;
+        return;
+    }
     int accessModifier = PRIVATE;
     if( flags < ACCESS_MODIFIERS.size() ) {
         accessModifier = flags;
@@ -50,7 +58,7 @@ std::string CSharpClass::compile(unsigned int level, std::string access) const
         if( m_fields[ i ].empty() ) {
             continue;
         }
-        //result += ACCESS_MODIFIERS[ i ] + ":\n";
+
         for( const auto& f : m_fields[ i ] ) {
             result += f->compile( level, ACCESS_MODIFIERS[ i ] );
         }
@@ -61,6 +69,10 @@ std::string CSharpClass::compile(unsigned int level, std::string access) const
 }
 
 void JavaClass::add(const std::shared_ptr<Unit> &unit, Flags flags) {
+    if(unit == nullptr) {
+        std::cout << "Out of memory for " << m_name << std::endl;
+        return;
+    }
     int accessModifier = INTERNAL;
     if( flags < 3 ) {
         accessModifier = flags;
@@ -76,7 +88,7 @@ std::string JavaClass::compile(unsigned int level, std::string access) const
         if( m_fields[ i ].empty() ) {
             continue;
         }
-        //result += ACCESS_MODIFIERS[ i ] + ":\n";
+
         for( const auto& f : m_fields[ i ] ) {
             result += f->compile( level, ACCESS_MODIFIERS[ i ] );
         }
