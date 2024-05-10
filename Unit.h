@@ -5,6 +5,7 @@
 #include <stdexcept>
 #include <vector>
 #include <QtGlobal>
+#include <iostream>
 
 class Unit {
 public:
