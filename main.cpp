@@ -11,7 +11,7 @@ std::string generateProgram(Factory& factory) {
         );
     myClass->add(
         factory.CreateMethod( "testFunc2", "void", MethodUnit::STATIC ),
-        ClassUnit::PRIVATE
+        ClassUnit::PRIVATE_PROTECTED
         );
     myClass->add(
         factory.CreateMethod( "testFunc3", "void", MethodUnit::VIRTUAL | MethodUnit::CONST ),
@@ -26,7 +26,9 @@ std::string generateProgram(Factory& factory) {
 int main(int argc, char *argv[])
 {
     CPlusFactory CFactory;
+    CSharpFactory SFactory;
     QCoreApplication a(argc, argv);
     std::cout << generateProgram(CFactory) << std::endl;
+     std::cout << generateProgram(SFactory) << std::endl;
     return a.exec();
 }

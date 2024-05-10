@@ -13,8 +13,19 @@ class CPlusPrintOperator : public PrintOperatorUnit
 {
 public:
     explicit CPlusPrintOperator( const std::string& text ) : PrintOperatorUnit( text ) { }
-    std::string compile( unsigned int level = 0 ) const {
+    std::string compile( unsigned int level = 0, std::string access = "" ) const {
+        Q_UNUSED(access)
         return generateShift( level ) + "printf( \"" + m_text + "\" );\n";
+    }
+};
+
+class CSharpPrintOperator : public PrintOperatorUnit
+{
+public:
+    explicit CSharpPrintOperator( const std::string& text ) : PrintOperatorUnit( text ) { }
+    std::string compile( unsigned int level = 0, std::string access = "" ) const {
+        Q_UNUSED(access)
+        return generateShift( level ) + "Console.WriteLine( \"" + m_text + "\" );\n";
     }
 };
 

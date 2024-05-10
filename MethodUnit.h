@@ -26,7 +26,14 @@ class CPlusMethod : public MethodUnit
 {
 public:
     CPlusMethod ( const std::string& name, const std::string& returnType, Flags flags ) : MethodUnit(name, returnType, flags) {}
-    std::string compile( unsigned int level = 0 ) const;
+    std::string compile( unsigned int level = 0, std::string access = "" ) const;
+};
+
+class CSharpMethod : public MethodUnit
+{
+public:
+    CSharpMethod ( const std::string& name, const std::string& returnType, Flags flags ) : MethodUnit(name, returnType, flags) {}
+    std::string compile( unsigned int level = 0, std::string access = "" ) const;
 };
 
 #endif // METHODUNIT_H

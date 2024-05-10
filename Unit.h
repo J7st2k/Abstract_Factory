@@ -4,6 +4,7 @@
 #include <memory>
 #include <stdexcept>
 #include <vector>
+#include <QtGlobal>
 
 class Unit {
 public:
@@ -13,7 +14,7 @@ public:
     virtual void add( const std::shared_ptr< Unit >& , Flags = 0 ) {
         throw std::runtime_error( "Not supported" );
     }
-    virtual std::string compile( unsigned int level = 0 ) const = 0;
+    virtual std::string compile( unsigned int level = 0, std::string access = "" ) const = 0;
 protected:
     virtual std::string generateShift( unsigned int level ) const;
 };

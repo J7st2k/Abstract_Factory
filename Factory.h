@@ -29,4 +29,18 @@ public:
     }
 };
 
+class CSharpFactory : public Factory
+{
+public:
+    std::shared_ptr<Unit> CreateClass(const std::string& name) {
+        return std::make_shared<CSharpClass>(name);
+    }
+    std::shared_ptr<Unit> CreateMethod(const std::string& name, const std::string& returnType, unsigned int flags) {
+        return std::make_shared<CSharpMethod>(name, returnType, flags);
+    }
+    std::shared_ptr<Unit> CreatePrintOperator(const std::string& text) {
+        return std::make_shared<CSharpPrintOperator>(text);
+    }
+};
+
 #endif // FACTORY_H
