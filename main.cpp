@@ -1,32 +1,41 @@
 #include <QCoreApplication>
-#include "Unit.h"
+#include "Factory.h"
 #include <iostream>
 
-const std::vector< std::string > ClassUnit::ACCESS_MODIFIERS = { "public", "protected", "private" };
 
-std::string generateProgram() {
-    ClassUnit myClass( "MyClass" );
-    myClass.add(
-        std::make_shared< MethodUnit >( "testFunc1", "void", 0 ),
+std::string generateProgram(Factory& factory) {
+    auto myClass = factory.CreateClass( "MyClass" );
+    if (myClass == nullptr) {
+        return "Out of memory for MyClass";
+    }
+    myClass->add(
+        factory.CreateMethod( "testFunc1", "void", 0 ),
         ClassUnit::PUBLIC
         );
-    myClass.add(
-        std::make_shared< MethodUnit >( "testFunc2", "void", MethodUnit::STATIC ),
-        ClassUnit::PRIVATE
+    myClass->add(
+        factory.CreateMethod( "testFunc2", "void", MethodUnit::STATIC ),
+        ClassUnit::PRIVATE_PROTECTED
         );
-    myClass.add(
-        std::make_shared< MethodUnit >( "testFunc3", "void", MethodUnit::VIRTUAL | MethodUnit::CONST ),
+    myClass->add(
+        factory.CreateMethod( "testFunc3", "void", MethodUnit::VIRTUAL | MethodUnit::CONST ),
         ClassUnit::PUBLIC
         );
-    auto method = std::make_shared< MethodUnit >( "testFunc4", "void", MethodUnit::STATIC );
-    method->add( std::make_shared< PrintOperatorUnit >( R"(Hello, world!\n)" ) );
-    myClass.add( method, ClassUnit::PROTECTED );
-    return myClass.compile();
+    auto method = factory.CreateMethod( "testFunc4", "void", MethodUnit::STATIC );
+    if (method) {
+        method->add( factory.CreatePrintOperator( R"(Hello, world!\n)" ) );
+        myClass->add( method, ClassUnit::PROTECTED );
+    }
+    return myClass->compile();
 }
 
 int main(int argc, char *argv[])
 {
+    CPlusFactory CFactory;
+    CSharpFactory SFactory;
+    JavaFactory JFactory;
     QCoreApplication a(argc, argv);
-    std::cout << generateProgram() << std::endl;
+    std::cout << generateProgram(CFactory) << std::endl;
+    std::cout << generateProgram(SFactory) << std::endl;
+    std::cout << generateProgram(JFactory) << std::endl;
     return a.exec();
 }
