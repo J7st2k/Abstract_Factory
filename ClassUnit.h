@@ -40,5 +40,13 @@ public:
     std::string compile( unsigned int level = 0, std::string access = "" ) const;
 };
 
+class JavaClass : public ClassUnit
+{
+public:
+    JavaClass( const std::string& name ):ClassUnit( name ) {}
+    void add( const std::shared_ptr< Unit >& unit, Flags flags = ACCESS_MODIFIERS.size() + 1 );
+    std::string compile( unsigned int level = 0, std::string access = "" ) const;
+};
+
 
 #endif // CLASSUNIT_H

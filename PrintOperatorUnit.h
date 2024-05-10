@@ -29,4 +29,14 @@ public:
     }
 };
 
+class JavaPrintOperator : public PrintOperatorUnit
+{
+public:
+    explicit JavaPrintOperator( const std::string& text ) : PrintOperatorUnit( text ) { }
+    std::string compile( unsigned int level = 0, std::string access = "" ) const {
+        Q_UNUSED(access)
+        return generateShift( level ) + "System.out.println( \"" + m_text + "\" );\n";
+    }
+};
+
 #endif // PRINTOPERATORUNIT_H

@@ -27,8 +27,10 @@ int main(int argc, char *argv[])
 {
     CPlusFactory CFactory;
     CSharpFactory SFactory;
+    JavaFactory JFactory;
     QCoreApplication a(argc, argv);
     std::cout << generateProgram(CFactory) << std::endl;
-     std::cout << generateProgram(SFactory) << std::endl;
+    std::cout << generateProgram(SFactory) << std::endl;
+    std::cout << generateProgram(JFactory) << std::endl;
     return a.exec();
 }
